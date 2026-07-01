@@ -17,6 +17,7 @@ COPY --from=build /app/target/forever-backend-1.0.0.jar app.jar
 RUN chown -R appuser:appgroup /app
 USER appuser
 
-EXPOSE 4000
+ENV PORT=4000
+EXPOSE ${PORT}
 
-ENTRYPOINT ["java", "-jar", "app.jar"]
+ENTRYPOINT ["java", "-Dserver.address=0.0.0.0", "-jar", "app.jar"]
